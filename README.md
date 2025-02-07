@@ -1,7 +1,6 @@
 # Netflix GPT
 
 - Configured Tailwind CSS
-- 
 
 ## Features
 
