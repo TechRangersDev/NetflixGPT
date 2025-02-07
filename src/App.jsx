@@ -3,8 +3,8 @@ import './App.css'
 function App() {
   return (
     <>
-      <div>
-        Hello
+      <div className='bg-sky-300'>
+        <h1 className='font-bold'>Hello world</h1>
       </div>
     </>
   )
