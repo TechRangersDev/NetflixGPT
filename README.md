@@ -1,6 +1,10 @@
 # Netflix GPT
 
 - Configured Tailwind CSS
+- Header
+- Login form / Sign up form
+-- Handling form in react - https://formik.org/
+
 
 ## Features
 
