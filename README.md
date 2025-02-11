@@ -1,9 +1,12 @@
 # Netflix GPT
 
+- Start the project - npm run dev
 - Configured Tailwind CSS
 - Header
+- Routing of App
 - Login form / Sign up form
--- Handling form in react - https://formik.org/
+- Form validation in react - https://formik.org/
+- useRef hook - Used for reference the value
 
 
 ## Features
