@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import Header from "./Header";
 import { checkValidData } from "../utils/validate";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -10,11 +12,39 @@ const Login = () => {
   
   const handleButtonClick = (e) => {
     e.preventDefault();
-        // Validate the form data
-        const message = checkValidData(email.current.value, password.current.value);
-        setErrorMessage(message);
-        
+    // Validate the form data
+    const message = checkValidData(email.current.value, password.current.value);
+    setErrorMessage(message);
+
+    if (message) return;
+
+    // Create a new user / Login user
+    if (!isSignInForm) {
+      createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+        .then((userCredential) => {
+          // Signed up 
+          const user = userCredential.user;
+          console.log('user', user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + " " + errorMessage);
+        });
+    } else {
+      signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode+"-"+errorMessage);
+        });
     }
+  }
 
     const toggleSignInForm = () => {
         setIsSignInForm(!isSignInForm);
@@ -49,7 +79,7 @@ const Login = () => {
           className="p-4 my-4 bg-gray-700 w-full rounded-md"
         />
         <input
-          type="passwrod"
+          type="password"
           ref={password}
           placeholder="Password"
           className="p-4 my-4 bg-gray-700 w-full rounded-md"
